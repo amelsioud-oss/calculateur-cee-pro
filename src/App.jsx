@@ -240,7 +240,6 @@ const OPERATIONS = {
         getCumac: (criteres, zone) => {
           const isCollective = criteres.typeInstallation === "Collective";
           const isModulee   = criteres.typeInstallation === "Individuelle modulée hygroréglable";
-          const coefZone = zone === "H1" ? 1 : zone === "H2" ? 1 : 1; // déjà intégré dans les bases
 
           if (isCollective) {
             const baseCollectif = zone === "H1" ? 23000 : zone === "H2" ? 18800 : 12500;
@@ -718,8 +717,6 @@ export default function App() {
               const selected = !!selections[code];
               const cat = OPERATIONS[activeCategory];
               const qty = quantities[code] ?? 1;
-              const cumacTotal = selected ? calcCumac(op, qty, zone) : null;
-              const prime = selected && tarifVal > 0 ? calcPrime(op, qty, zone, tarifVal) : null;
               return (
                 <div key={code} style={{...S.opCard, ...(selected?{border:`2px solid ${cat.color}`, background:"rgba(255,255,255,0.07)"}:{})}}>
                   <div style={S.opTop}>
